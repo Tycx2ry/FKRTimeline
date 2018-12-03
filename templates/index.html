@@ -6,7 +6,7 @@
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
     <title>碎片知识记录</title>
-    <!--link rel="stylesheet" type= "text/css" href="main.css"-->
+    <!--link rel="stylesheet" type= "text/css" href="../static/css/main.css"-->
     <link rel="stylesheet" type= "text/css" href="{{ url_for('static', filename='css/main.css') }}">
 </head>
 <body>
@@ -33,13 +33,11 @@
     </div>
 
     <div id="entries-area">
-        <h2>留言历史信息</h2>
+        <div id="title">记录列表</div>
 
         <div class="entry">
             {% for greeting in greeting_list%}
-            <h3>{{greeting.name}}
-                留言于({{greeting.create_at}}:)</h3>
-
+            <h3>{{greeting.create_at}} by:{{greeting.name}}</h3>
             <p>{{greeting.comment}}</p>
             {% endfor %}
         </div>
