@@ -1,8 +1,8 @@
 body {
     margin:0;
     padding:0;
-    color:#000E41;
-    background-color:#004080;
+    color:#000000;
+    background-color:#FFFFFF;
 }
 
 h1 {
@@ -16,7 +16,7 @@ h1 {
 
 #form-area {
     padding:0.5em 2em;
-    background-color:#78B8F8;
+    background-color:#FFFFFF;
 }
 
 #entries-area {
@@ -26,5 +26,5 @@ h1 {
 
 .entry p {
     padding:0.5em lem;
-    background-color:#DBDBFF;
+    background-color:#FFFFFF;
 }
