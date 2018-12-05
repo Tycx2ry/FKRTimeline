@@ -89,5 +89,11 @@ body {
     border-right: 1px dashed black;
 }
 
+p {
+	word-wrap: break-word;
+    word-break: break-all;
+    overflow: hidden;
+}
+
 
 
