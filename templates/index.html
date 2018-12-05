@@ -37,11 +37,11 @@
         <div id="title">记录列表</div>
 
         <div class="entry">
-            {% for greeting in greeting_list%}
-            <div id="timeandauthor"><span id="author">{{greeting.name}}</span> 记录于 <span id="time">{{greeting.create_at}}</span></div>
+            {% for record in record_list%}
+            <div id="timeandauthor"><span id="author">{{record.name}}</span> 记录于 <span id="time">{{record.create_at}}</span></div>
             <p>
                 <a href="{{greeting.url}}" target="_blank">读</a>
-                {{greeting.comment}}
+                {{record.comment}}
             </p>
             {% endfor %}
         </div>

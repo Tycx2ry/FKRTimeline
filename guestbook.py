@@ -3,45 +3,42 @@
 
 __author__ = 'jiangge'
 
-import shelve
+from flask.ext.sqlalchemy import SQLAlchemy
 from datetime import datetime
 from flask import Flask, request, render_template, redirect
 
 application = Flask(__name__)
+application.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///guestbook.db'
+db = SQLAlchemy(application)
 
-DATA_FILE = 'guestbook.dat'
+class posts(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(50))
+    comment = db.Column(db.Text)
+    url = db.Column(db.Text)
+    create_at = db.Column(db.DateTime)
+    
+    def __init__(self, name, comment, url, create_at):
+        self.name = name
+        self.comment = comment
+        self.url = url
+        self.create_at = create_at
 
-
+        
 def save_data(name, comment, url, create_at):
     """
     save data from form submitted
     """
-    database = shelve.open(DATA_FILE)
-
-    if 'greeting_list' not in database:
-        greeting_list = []
-    else:
-        greeting_list = database['greeting_list']
-
-    greeting_list.insert(
-        0, {'name': name, 'comment': comment, 'url': url, 'create_at': create_at})
-
-    database['greeting_list'] = greeting_list
-
-    database.close()
+    db.session.add(posts(name, comment, url, create_at))
+    db.session.commit()
 
 
 def load_data(page):
     """
     load saved data
     """
-    database = shelve.open(DATA_FILE)
-
-    greeting_list = database.get('greeting_list', []).pagenate(page, per_page=1, error_out=True)
-
-    database.close()
-
-    return greeting_list
+    record_list = posts.query.all().pagenate(page, per_page=1, error_out=True)
+    return record_list
 
 
 @application.route('/', methods=['GET', 'POST'])
@@ -51,8 +48,8 @@ def index(page = 1):
     """Top page
     Use template to show the page
     """
-    greeting_list = load_data(page)
-    return render_template('index.html', greeting_list=greeting_list.items)
+    record_list = load_data(page)
+    return render_template('index.html', record_list=record_list.items)
 
 
 @application.route('/post', methods=['POST'])
@@ -70,4 +67,5 @@ def post():
 
 
 if __name__ == '__main__':
+    db.create_all()
     application.run('0.0.0.0', port=80, debug=True)
