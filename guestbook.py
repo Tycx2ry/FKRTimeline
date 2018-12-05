@@ -9,6 +9,7 @@ from flask import Flask, request, render_template, redirect
 
 application = Flask(__name__)
 application.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///guestbook.db'
+application.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(application)
 
 class posts(db.Model):
@@ -37,7 +38,7 @@ def load_data(page):
     """
     load saved data
     """
-    record_list = posts.query.all().pagenate(page, per_page=1, error_out=True)
+    record_list = posts.query.paginate(page, per_page=5, error_out=True)
     return record_list
 
 
@@ -67,5 +68,9 @@ def post():
 
 
 if __name__ == '__main__':
-    db.create_all()
+    if True:
+        db.drop_all()
+        db.create_all()
+        db.session.add(posts(text=application.config["FIRST_MESSAGE"]))
+        db.session.commit()
     application.run('0.0.0.0', port=80, debug=True)
