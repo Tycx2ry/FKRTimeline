@@ -3,7 +3,7 @@
 
 __author__ = 'jiangge'
 
-from flask.ext.sqlalchemy import SQLAlchemy
+from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from flask import Flask, request, render_template, redirect
 
