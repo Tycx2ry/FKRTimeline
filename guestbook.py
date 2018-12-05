@@ -31,26 +31,28 @@ def save_data(name, comment, url, create_at):
     database.close()
 
 
-def load_data():
+def load_data(page):
     """
     load saved data
     """
     database = shelve.open(DATA_FILE)
 
-    greeting_list = database.get('greeting_list', [])
+    greeting_list = database.get('greeting_list', []).pagenate(page, per_page=1, error_out=True)
 
     database.close()
 
     return greeting_list
 
 
-@application.route('/')
-def index():
+@application.route('/', methods=['GET', 'POST'])
+@application.route('/index/ ', methods=['GET', 'POST'])
+@application.route('/index/<int:page>', methods=['GET', 'POST'])
+def index(page = 1):
     """Top page
     Use template to show the page
     """
-    greeting_list = load_data()
-    return render_template('index.html', greeting_list=greeting_list)
+    greeting_list = load_data(page)
+    return render_template('index.html', greeting_list=greeting_list.items)
 
 
 @application.route('/post', methods=['POST'])
