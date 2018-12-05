@@ -24,8 +24,7 @@
                 <span>
                 简单描述：
                 </span>
-                <textarea name="comment">     
-                </textarea>
+                <textarea name="comment"></textarea>
             </div>           
             <p>
                 <button type="submit">书山有路勤为径,学海无涯苦做舟</button>
@@ -40,7 +39,7 @@
             {% for greeting in greeting_list%}
             <h3>{{greeting.create_at}} by:{{greeting.name}}</h3>
             <p>
-                <a href="{{greeting.url}}">读</a>
+                <a href="{{greeting.url}}" target="_blank">读</a>
                 {{greeting.comment}}
             </p>
             {% endfor %}
