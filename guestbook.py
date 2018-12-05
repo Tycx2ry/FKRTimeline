@@ -12,7 +12,7 @@ application = Flask(__name__)
 DATA_FILE = 'guestbook.dat'
 
 
-def save_data(name, comment, create_at):
+def save_data(name, comment, url, create_at):
     """
     save data from form submitted
     """
@@ -24,7 +24,7 @@ def save_data(name, comment, create_at):
         greeting_list = database['greeting_list']
 
     greeting_list.insert(
-        0, {'name': name, 'comment': comment, 'create_at': create_at})
+        0, {'name': name, 'comment': comment, 'url': url, 'create_at': create_at})
 
     database['greeting_list'] = greeting_list
 
@@ -59,9 +59,10 @@ def post():
     """
     name = request.form.get('name')
     comment = request.form.get('comment')
+    url = request.form.get('url')
     create_at = datetime.now()
 
-    save_data(name, comment, create_at)
+    save_data(name, comment, url, create_at)
 
     return redirect('/')
 

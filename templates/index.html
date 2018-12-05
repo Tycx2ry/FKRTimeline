@@ -19,15 +19,16 @@
     <div id="form-area">
         <form action="/post" method="post">
             <div id = "record"><span>记录者：<input type="text" size="20" name="name" /></span></div>
+            <div id = "url"><span>连&nbsp;&nbsp;&nbsp;接：<input type="text" size="20" name="url" /></span></div>
             <div id = "content">
                 <span>
-                内容：
+                简单描述：
                 </span>
                 <textarea name="comment">     
                 </textarea>
             </div>           
             <p>
-                <button type="submit">提交</button>
+                <button type="submit">书山有路勤为径,学海无涯苦做舟</button>
             </p>
         </form>
     </div>
@@ -38,7 +39,10 @@
         <div class="entry">
             {% for greeting in greeting_list%}
             <h3>{{greeting.create_at}} by:{{greeting.name}}</h3>
-            <p>{{greeting.comment}}</p>
+            <p>
+                <a href="{{greeting.url}}">读</a>
+                {{greeting.comment}}
+            </p>
             {% endfor %}
         </div>
     </div>
