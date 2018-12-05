@@ -94,8 +94,9 @@ body {
 }
 
 #entries-area .entry #timeandauthor #author {
-	border: 1px dashed black;
 	background: #a9a9a9;
+	padding-left: 5px;
+	padding-right: 5px;
 }
 
 #entries-area .entry p{
