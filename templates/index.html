@@ -19,7 +19,7 @@
     <div id="form-area">
         <form action="/post" method="post">
             <div id = "record"><span>记录者：<input type="text" size="20" name="name" /></span></div>
-            <div id = "url"><span>连&nbsp;&nbsp;&nbsp;接：<input type="text" size="20" name="url" /></span></div>
+            <div id = "url"><span>连&nbsp;&nbsp;&nbsp;接：<input type="text" size="45" name="url" /></span></div>
             <div id = "content">
                 <span>
                 简单描述：
@@ -37,7 +37,7 @@
 
         <div class="entry">
             {% for greeting in greeting_list%}
-            <h3>{{greeting.create_at}} by:{{greeting.name}}</h3>
+            <div id="timeandauthor"><span id="author">{{greeting.name}}</span> 记录于 <span id="time">{{greeting.create_at}}</span></div>
             <p>
                 <a href="{{greeting.url}}" target="_blank">读</a>
                 {{greeting.comment}}

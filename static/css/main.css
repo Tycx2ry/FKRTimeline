@@ -84,10 +84,20 @@ body {
 	margin-left: 20px;
 }
 
-#entries-area .entry h3{
+#entries-area .entry #timeandauthor {
 	margin-top: 10px;
 	margin-bottom: 5px;
 }
+
+#entries-area .entry #timeandauthor #time {
+	font-style: oblique;
+}
+
+#entries-area .entry #timeandauthor #author {
+	border: 1px dashed black;
+	background: #a9a9a9;
+}
+
 #entries-area .entry p{
 	border-bottom: 1px dashed black;
 	margin-left: 10px;
